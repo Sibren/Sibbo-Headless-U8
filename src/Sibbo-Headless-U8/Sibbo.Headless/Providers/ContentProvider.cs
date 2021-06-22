@@ -57,8 +57,12 @@ namespace Sibbo.Headless.Providers
         /// <returns></returns>
         public List<string> GetAllRoutes()
         {
-            var blogOverviewPage = GetPage("/");
-            return blogOverviewPage.DescendantsOrSelf().Select(x => x.Url()).ToList();
+            var allSubRoutes = GetPage("/");
+            var list = new List<string>();
+
+            list.AddRange(allSubRoutes.DescendantsOrSelf().Select(x => x.Url()));
+
+            return list;
         }
 
         public Dictionary<string, object> GetPageContent(IPublishedContent publishedContent)
