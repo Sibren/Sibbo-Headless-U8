@@ -4,6 +4,7 @@ Sibbo Headless is a new library for making your Umbraco backend headless without
 
 ## Installation
 
+Use the login: plugins@sibbo.nl:Wachtwoord
 There is no decent installation at this point. It's just in alpha and having some issues. If you want to use it, please clone and make PR's
 
 ## Usage
@@ -11,6 +12,7 @@ There is no decent installation at this point. It's just in alpha and having som
 ```
 https://localhost:44366/sibbo-headless/url # get the main site
 https://localhost:44366/sibbo-headless/url/page # get the /page contents
+https://localhost:44366/sibbo-headless/url/page_-slash-_item # get the /page/item contents
 https://localhost:44366/sibbo-headless/menu # get the menu-items
 https://localhost:44366/sibbo-headless/routes # get all routes for NuxtJS or similar
 ```
