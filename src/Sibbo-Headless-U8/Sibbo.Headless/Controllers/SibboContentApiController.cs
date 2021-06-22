@@ -4,6 +4,7 @@ using Sibbo.Headless.Providers;
 using System.Collections.Generic;
 using System.Web.Http;
 using Umbraco.Core.Logging;
+using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Web.WebApi;
 
 namespace Sibbo.Headless.Controllers
@@ -36,34 +37,17 @@ namespace Sibbo.Headless.Controllers
         [Route("id/{id}")]
         public string GetContentById(int id)
         {
-            try
-            {
-                var item = contentProvider.GetPage(id);
-                var content = contentProvider.GetPageContent(item);
-                return JsonConvert.SerializeObject(content);
-            }
-            catch (System.Exception ex)
-            {
-                Logger.Error<SibboContentApiController>("Error getting content", ex);
-                throw new System.Exception("Error getting values");
-            }
+            var item = contentProvider.GetPage(id);
+            return GetPageContent(item);
+
         }
 
         [HttpGet]
         [Route("url")]
         public string GetContentByUrl()
         {
-            try
-            {
-                var item = contentProvider.GetPage("/");
-                var content = contentProvider.GetPageContent(item);
-                return JsonConvert.SerializeObject(content);
-            }
-            catch (System.Exception ex)
-            {
-                Logger.Error<SibboContentApiController>("Error getting content", ex);
-                throw new System.Exception("Error getting values");
-            }
+            var item = contentProvider.GetPage("/");
+            return GetPageContent(item);
         }
 
         [HttpGet]
@@ -73,9 +57,14 @@ namespace Sibbo.Headless.Controllers
             var item = contentProvider.GetPage("/" + url.Replace("-_slash_-", "/").TrimEnd('/'));
             if (item == null) throw new System.ArgumentNullException("Page not found");
 
+            return GetPageContent(item);
+        }
+
+        private string GetPageContent(IPublishedContent publishedContent)
+        {
             try
             {
-                var content = contentProvider.GetPageContent(item);
+                var content = contentProvider.GetPageContent(publishedContent);
                 return JsonConvert.SerializeObject(content);
             }
             catch (System.Exception ex)
