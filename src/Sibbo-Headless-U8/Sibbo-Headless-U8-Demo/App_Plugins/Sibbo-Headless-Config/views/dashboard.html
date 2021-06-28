@@ -1,0 +1,32 @@
+﻿<div class="umb-dashboard__content" ng-controller="sibboHeadlessConfigController">
+    <umb-box>
+        <umb-box-header title="Select the footer and its properties" description="Which properties should be exposed to the footer?"></umb-box-header>
+        <umb-box-content>
+            <div class="linkbutton-row">
+                <label>Page with footer properties: </label>
+                <div ng-if="!isLoading">
+                    <umb-property-editor model="contentPicker" ng-model="model.contentPicker"></umb-property-editor>
+                </div>
+            </div>
+            <div class="checkboxes" ng-if="propertyTypes.length > 0">
+                <h3>Select the right properties:</h3>
+                <div ng-repeat="property in propertyTypes">
+                    <label>
+                        <input type="checkbox"
+                               name="selectedEducations"
+                               value="{{property.id}}"
+                               ng-model="property.selected"> {{property.name}}
+                    </label>
+                </div>
+            </div>
+
+            <div ng-if="showSaveButton && !saveButtonDisabled">
+                <umb-button action="saveFooter()"
+                            label="Save footer"
+                            type="button"
+                            button-style="info">
+                </umb-button>
+            </div>
+        </umb-box-content>
+    </umb-box>
+</div>

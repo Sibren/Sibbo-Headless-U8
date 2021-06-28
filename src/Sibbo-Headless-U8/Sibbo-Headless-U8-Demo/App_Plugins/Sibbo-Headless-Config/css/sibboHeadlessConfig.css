@@ -1,0 +1,23 @@
+﻿.w3s-page-container {
+    position: relative;
+    min-height: 100vh;
+}
+
+.checkbox {
+    display: block !important;
+    width: 15.5%;
+    flex: 1 1 auto;
+    font-size: 5px;
+}
+
+.checkbox__wrapper {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: calc(100% - 150px);
+    overflow-x: scroll;
+}
+
+label {
+    font-size: 14px;
+}

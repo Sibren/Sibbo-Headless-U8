@@ -65,11 +65,24 @@ namespace Sibbo.Headless.Providers
             return list;
         }
 
-        public Dictionary<string, object> GetPageContent(IPublishedContent publishedContent)
+        public Dictionary<string, object> GetPageContent(IPublishedContent publishedContent, List<string> selectedObjects = null)
         {
-            var dictionary = GetSettings(publishedContent.Id, publishedContent.Url(), publishedContent.Properties, publishedContent.ContentType.Alias);
+            var properties = publishedContent.Properties;
+
+            if (selectedObjects != null)
+            {
+                properties = properties.Where(x => selectedObjects.Contains(x.Alias));
+            }
+
+            var dictionary = GetSettings(publishedContent.Id, publishedContent.Url(), properties, publishedContent.ContentType.Alias);
 
             return dictionary;
+        }
+
+        public Dictionary<string, object> GetPageContent(int id, List<string> selectedObjects = null)
+        {
+            var page = GetPage(id);
+            return GetPageContent(page, selectedObjects);
         }
 
         public Dictionary<string, object> GetSettings(int id, string url, IEnumerable<IPublishedProperty> publishedProperties, string docType = "")

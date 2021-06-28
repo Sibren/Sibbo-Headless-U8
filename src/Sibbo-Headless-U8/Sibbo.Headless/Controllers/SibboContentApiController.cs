@@ -2,6 +2,7 @@
 using Sibbo.Headless.Models;
 using Sibbo.Headless.Providers;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Http;
 using Umbraco.Core.Logging;
 using Umbraco.Core.Models.PublishedContent;
@@ -13,10 +14,12 @@ namespace Sibbo.Headless.Controllers
     public class SibboContentApiController : UmbracoApiController
     {
         private readonly ContentProvider contentProvider;
+        private readonly SettingsProvider settingsProvider;
 
-        public SibboContentApiController(ContentProvider contentService)
+        public SibboContentApiController(ContentProvider contentService, SettingsProvider settingsProvider)
         {
             this.contentProvider = contentService;
+            this.settingsProvider = settingsProvider;
         }
 
         [HttpGet]
@@ -43,6 +46,19 @@ namespace Sibbo.Headless.Controllers
         }
 
         [HttpGet]
+        [Route("footer")]
+        public string GetFooter()
+        {
+            var footer = settingsProvider.GetBackendProperties(true);
+            if (footer == null)
+            {
+                return "";
+            }
+
+            return GetPageContent(footer.Id, footer.Properties.Select(x => x.Name).ToList());
+        }
+
+        [HttpGet]
         [Route("url")]
         public string GetContentByUrl()
         {
@@ -65,6 +81,20 @@ namespace Sibbo.Headless.Controllers
             try
             {
                 var content = contentProvider.GetPageContent(publishedContent);
+                return JsonConvert.SerializeObject(content);
+            }
+            catch (System.Exception ex)
+            {
+                Logger.Error<SibboContentApiController>("Error getting content", ex);
+                throw new System.Exception("Error getting values");
+            }
+        }
+
+        private string GetPageContent(int id, List<string> properties = null)
+        {
+            try
+            {
+                var content = contentProvider.GetPageContent(id, properties);
                 return JsonConvert.SerializeObject(content);
             }
             catch (System.Exception ex)

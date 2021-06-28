@@ -1,0 +1,15 @@
+﻿{
+  "dashboards": [
+    {
+      "alias": "Headless Config",
+      "view": "/App_Plugins/Sibbo-Headless-Config/Views/dashboard.html",
+      "sections": [ "content" ]
+    }
+  ],
+  "javascript": [
+    "~/App_Plugins/Sibbo-Headless-Config/controllers/sibboHeadlessConfig.controller.js"
+  ],
+  "css": [
+    "~/App_Plugins/Sibbo-Headless-Config/css/sibboHeadlessConfig.css"
+  ]
+}

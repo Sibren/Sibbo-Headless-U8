@@ -242,13 +242,24 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Authorization\GuidBackendAuthorizationAttribute.cs" />
     <Compile Include="Controllers\SibboContentApiController.cs" />
+    <Compile Include="Controllers\SibboContentBackendApiController.cs" />
+    <Compile Include="Controllers\SibboPostApiController.cs" />
+    <Compile Include="Migrations\Migration1.cs" />
+    <Compile Include="Migrations\SibboHeadlessMigrationPlan.cs" />
+    <Compile Include="Models\Backend\BackendFooterPropertiesModel.cs" />
+    <Compile Include="Models\Backend\BackendPropertyModel.cs" />
+    <Compile Include="Models\Database\SibboSolutionsPropertiesModel.cs" />
     <Compile Include="Models\MenuItemModel.cs" />
     <Compile Include="Models\MultiUrlPickerModel.cs" />
     <Compile Include="Models\PublishedContentItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ContentProvider.cs" />
+    <Compile Include="Providers\DocTypeProvider.cs" />
+    <Compile Include="Providers\SettingsProvider.cs" />
     <Compile Include="SibboHeadlessComposer.cs" />
+    <Compile Include="SibboHeadlessConstants.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
