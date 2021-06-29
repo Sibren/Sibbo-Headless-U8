@@ -82,7 +82,7 @@
                     else {
                         notificationsService.add({
                             headline: 'Er is iets misgegaan. Neem contact op met W3S!',
-                            sticky: false,
+                            sticky: true,
                             type: 'error'
                         });
                         $scope.saveButtonDisabled = false;
